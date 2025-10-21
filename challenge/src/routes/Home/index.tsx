@@ -15,6 +15,7 @@ export default function Home() {
           </p>
 
           <div className="flex flex-col items-center md:items-start gap-4 mt-6">
+
             <Link
               to="/login"
               className="w-3/4 md:w-2/3 bg-[#005b96] text-white text-lg py-3 rounded-lg text-center hover:bg-[#004b7d] transition"
