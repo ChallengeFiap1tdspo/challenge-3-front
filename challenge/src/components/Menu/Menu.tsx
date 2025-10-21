@@ -13,6 +13,7 @@ export default function Menu() {
           <Link to="/faq" className="hover:text-gray-400">FAQ</Link>
           <Link to="/contato" className="hover:text-gray-400">Contato</Link>
           <Link to="/equipe" className="hover:text-gray-400">Equipe</Link>
+          <Link to="/sobre" className="hover:text-gray-400">Sobre</Link>
         </div>
       </div>
     </nav>

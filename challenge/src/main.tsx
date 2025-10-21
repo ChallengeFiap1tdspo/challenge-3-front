@@ -10,6 +10,8 @@ import Contato from './routes/Contato/index.tsx';
 import Error from './routes/Error/index.tsx';
 import Ajuda from './routes/Ajuda/index.tsx';
 import Equipe from './routes/Equipe/index.tsx';
+import Sobre from './routes/Sobre/index.tsx';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,7 +22,8 @@ const router = createBrowserRouter([
       { path: "/faq", element: <Faq /> },      
       { path: "/contato", element: <Contato /> }, 
       { path: "/ajuda", element: <Ajuda /> },
-      { path: "/equipe", element: <Equipe /> }
+      { path: "/equipe", element: <Equipe /> },
+      { path: "/sobre", element: <Sobre /> }
 
 
     ]
