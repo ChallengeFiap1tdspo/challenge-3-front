@@ -1,12 +1,6 @@
+
+
 import React from "react";
-
-/**
- * AjudaHC.tsx
- * - Versão sem API: dados embutidos (steps + tutoriais)
- * - Estilo inline com classes Tailwind (paleta azul)
- * - Feito como exercício de 2º semestre ADS: direto ao ponto, fácil de entender
- */
-
 type Step = {
   order: number;
   title: string;
@@ -31,7 +25,7 @@ const steps: Step[] = [
   { order: 8, title: "Iniciar Atendimento", description: "Habilite câmera e microfone e aguarde o profissional entrar na sala." },
 ];
 
-// Seus links do Drive (usados diretamente no botão "Assistir")
+
 const tutorials: Tutorial[] = [
   {
     id: 1,
@@ -57,7 +51,7 @@ export default function AjudaHC() {
         </header>
 
         <main className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Passos */}
+          
           <section className="md:col-span-2 space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-semibold text-[#003f63]">Como Funciona</h2>
@@ -83,7 +77,7 @@ export default function AjudaHC() {
             </div>
           </section>
 
-          {/* Tutoriais */}
+       
           <aside className="space-y-4">
             <div className="bg-white p-4 rounded-lg shadow">
               <h3 className="font-semibold text-[#003f63]">Tutoriais em vídeo</h3>

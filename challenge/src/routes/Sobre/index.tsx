@@ -46,13 +46,6 @@ export default function Sobre() {
               de fonte maiores) e medidas básicas de segurança, como conexões via HTTPS
               e validação mínima dos dados.
             </p>
-
-            <div className="bg-gray-50 border border-gray-200 rounded-md p-4">
-              <p className="text-sm text-gray-500">
-                Técnicas principais: HTML semântico, aria-labels quando necessário,
-                validação de formulário e criptografia em trânsito.
-              </p>
-            </div>
           </div>
         </div>
 
