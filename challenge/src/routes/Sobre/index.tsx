@@ -42,8 +42,7 @@ export default function Sobre() {
               Acessibilidade & Segurança
             </h2>
             <p className="text-gray-600 mb-4">
-              Adotamos práticas de acessibilidade (contraste, leitura por tela, tamanhos
-              de fonte maiores) e medidas básicas de segurança, como conexões via HTTPS
+              Adotamos práticas de acessibilidade e medidas básicas de segurança, como conexões via HTTPS
               e validação mínima dos dados.
             </p>
           </div>
