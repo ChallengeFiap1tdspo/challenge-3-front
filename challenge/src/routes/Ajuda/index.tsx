@@ -71,10 +71,6 @@ export default function AjudaHC() {
                 </article>
               ))}
             </div>
-
-            <div className="mt-4 p-4 bg-white rounded-lg border-l-4 border-[#0073b3] shadow-sm">
-              <p className="text-sm text-gray-700">Esta tela é funcional sem backend: os tutoriais abrem os links que você forneceu.</p>
-            </div>
           </section>
 
        
@@ -116,7 +112,7 @@ export default function AjudaHC() {
           </aside>
         </main>
 
-        <footer className="mt-8 text-center text-xs text-gray-500">Feito como exercício — versão sem API, funcional sozinho.</footer>
+   
       </div>
     </div>
   );
