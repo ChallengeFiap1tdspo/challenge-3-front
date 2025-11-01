@@ -18,7 +18,7 @@ import PrimeiroContato from "./routes/Primeiro-Contato/index.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <App />,         // App deve ter <Outlet /> para renderizar as children abaixo
     errorElement: <Error />,
     children: [
       { path: "/", element: <Home /> },
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
       { path: "/sobre", element: <Sobre /> },
       { path: "/login", element: <Login /> },
       { path: "/cadastro", element: <Cadastro /> },
-      { path: "/primeiro-contato", element: <PrimeiroContato /> }
+      { path: "/primeiro-contato", element: <PrimeiroContato /> },
     ],
   },
 ]);
