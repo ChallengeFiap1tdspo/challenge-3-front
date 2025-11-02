@@ -28,6 +28,15 @@ export default function Login() {
         <h1 className="text-2xl font-bold text-[#005b96] text-center mb-2">
           Acesso do Paciente
         </h1>
+        <input
+          type="number"
+          placeholder="Idade"
+          {...register("idade", { required: "Informe sua idade" })}
+          className="border border-[#00a1e0] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#005b96]"
+        />
+        {errors.idade && (
+          <small className="text-red-600">{errors.idade.message}</small>
+        )}
 
 
 
