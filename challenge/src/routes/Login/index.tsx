@@ -24,4 +24,11 @@ export default function Login() {
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="bg-white shadow-lg rounded-2xl p-8 w-80 flex flex-col gap-4 border-t-4 border-[#005b96]"
-      ></form>
+      >
+        <h1 className="text-2xl font-bold text-[#005b96] text-center mb-2">
+          Acesso do Paciente
+        </h1>
+
+
+
+      </form>
