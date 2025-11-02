@@ -54,7 +54,7 @@ export default function Cadastro() {
             },
             body: JSON.stringify(pacienteParaApi),
         });
-        
+
 if (response.status === 201) {
             const pacienteCriado = await response.json();
             console.log("Cadastro realizado com sucesso:", pacienteCriado);
@@ -62,3 +62,20 @@ if (response.status === 201) {
             reset();
             navigate("/primeiro-contato");
         } else {
+           
+            const errorData = await response.json();
+            const errorMessage = errorData.erro || errorData.message || `Erro ${response.status}: ${response.statusText}`; // Tenta pegar a msg de erro
+            console.error("Erro da API:", errorMessage);
+            setApiError(errorMessage);
+ 
+            if (response.status === 409) { 
+                setError("cpf", { type: "manual", message: "CPF já cadastrado." });
+            }
+        }
+    } catch (error) {
+        console.error("Falha ao conectar com a API:", error);
+        setApiError("Não foi possível conectar ao servidor. Verifique sua conexão ou tente mais tarde.");
+    } finally {
+        setIsLoading(false);
+    }
+  };
