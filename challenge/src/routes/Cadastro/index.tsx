@@ -168,4 +168,31 @@ if (response.status === 201) {
           disabled={isLoading}
         />
         {errors.telefone && (
-          <small className="text-red-600">{errors.telefone.message}</small>
+          <small className="text-red-600">{errors.telefone.message}</small>)}
+ 
+         {/* Mostra erro geral da API */}
+         {apiError && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <span className="block sm:inline">{apiError}</span>
+            </div>
+         )}
+ 
+ 
+        <button
+          type="submit"
+          className={`py-2 rounded-lg transition font-semibold shadow-md ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#00a1e0] text-white hover:bg-[#008ac0]'}`}
+          disabled={isLoading}
+        >
+          {isLoading ? "Cadastrando..." : "Cadastrar"}
+        </button>
+ 
+        <Link
+          to="/login"
+          className="text-[#005b96] text-center hover:underline mt-2"
+        >
+          Já possui cadastro? Faça login
+        </Link>
+      </form>
+    </main>
+  );
+}
