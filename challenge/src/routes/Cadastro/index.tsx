@@ -79,3 +79,43 @@ if (response.status === 201) {
         setIsLoading(false);
     }
   };
+    return (
+    <main className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#005b96]/30 to-[#00a1e0]/30 p-4">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-sm flex flex-col gap-4 border-t-4 border-[#00a1e0]"
+      >
+        <h1 className="text-2xl font-bold text-[#005b96] text-center mb-2">
+          Cadastro de Novo Paciente
+        </h1>
+ 
+        {/* Campo Nome */}
+        <input
+          type="text"
+          placeholder="Nome completo *"
+          {...register("nome", { required: "Informe seu nome completo" })}
+          className={`border rounded-lg p-2 focus:outline-none focus:ring-2 ${errors.nome ? 'border-red-500 ring-red-300' : 'border-[#00a1e0] focus:ring-[#005b96]'}`}
+          disabled={isLoading}
+        />
+        {errors.nome && (
+          <small className="text-red-600">{errors.nome.message}</small>
+        )}
+ 
+        {/* Campo Email */}
+        <input
+          type="email"
+          placeholder="E-mail *"
+          {...register("email", {
+             required: "Informe seu e-mail",
+             pattern: {
+                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                 message: "Formato de e-mail inválido"
+             }
+          })}
+          className={`border rounded-lg p-2 focus:outline-none focus:ring-2 ${errors.email ? 'border-red-500 ring-red-300' : 'border-[#00a1e0] focus:ring-[#005b96]'}`}
+          disabled={isLoading}
+        />
+        {errors.email && (
+          <small className="text-red-600">{errors.email.message}</small>
+        )}
+ 
