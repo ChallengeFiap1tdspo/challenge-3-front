@@ -73,3 +73,11 @@ export default function Cadastro() {
                 setError("cpf", { type: "manual", message: "CPF já cadastrado." });
             }
         }
+        }
+      catch (error) {
+        console.error("Falha ao conectar com a API:", error);
+        setApiError("Não foi possível conectar ao servidor. Verifique sua conexão ou tente mais tarde.");
+    } finally {
+        setIsLoading(false);
+    }
+  };
