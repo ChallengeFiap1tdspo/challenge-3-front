@@ -37,6 +37,23 @@ export default function Login() {
         {errors.idade && (
           <small className="text-red-600">{errors.idade.message}</small>
         )}
+        <input
+          type="text"
+          placeholder="CPF"
+          {...register("cpf", { required: "Informe seu CPF" })}
+          className="border border-[#00a1e0] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#005b96]"
+        />
+        {errors.cpf && (
+          <small className="text-red-600">{errors.cpf.message}</small>
+        )}
+ 
+        <button
+          type="submit"
+          className="bg-[#005b96] text-white py-2 rounded-lg hover:bg-[#004b7d] transition font-semibold shadow-md"
+        >
+          Entrar
+        </button>
+ 
 
 
 
