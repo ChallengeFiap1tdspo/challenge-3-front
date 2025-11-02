@@ -90,3 +90,14 @@ export default function Cadastro() {
         <h1 className="text-2xl font-bold text-[#005b96] text-center mb-2">
           Cadastro de Novo Paciente
         </h1>
+        {/* Campo Nome */}
+        <input
+          type="text"
+          placeholder="Nome completo *"
+          {...register("nome", { required: "Informe seu nome completo" })}
+          className={`border rounded-lg p-2 focus:outline-none focus:ring-2 ${errors.nome ? 'border-red-500 ring-red-300' : 'border-[#00a1e0] focus:ring-[#005b96]'}`}
+          disabled={isLoading}
+        />
+        {errors.nome && (
+          <small className="text-red-600">{errors.nome.message}</small>
+        )}
