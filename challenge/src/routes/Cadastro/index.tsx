@@ -38,3 +38,19 @@ export default function Cadastro() {
         email: data.email
     };
  
+    try {
+        const apiUrl = import.meta.env.VITE_API_URL + "/api/pacientes";
+        
+        console.log("Enviando para API:", apiUrl, pacienteParaApi);
+ 
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json', 
+               
+                'X-API-Key': 'chave_secreta_muito_segura_123456'
+                
+            },
+            body: JSON.stringify(pacienteParaApi),
+        });
