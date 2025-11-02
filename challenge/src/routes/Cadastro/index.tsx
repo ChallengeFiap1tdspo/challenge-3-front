@@ -118,4 +118,54 @@ if (response.status === 201) {
         {errors.email && (
           <small className="text-red-600">{errors.email.message}</small>
         )}
+
+        {/* Campo Idade */}
+        <input
+          type="number"
+          placeholder="Idade *"
+          {...register("idade", {
+             required: "Informe sua idade",
+             valueAsNumber: true,
+             min: { value: 1, message: "Idade deve ser maior que 0"},
+             max: { value: 120, message: "Idade inválida"}
+           })}
+          className={`border rounded-lg p-2 focus:outline-none focus:ring-2 ${errors.idade ? 'border-red-500 ring-red-300' : 'border-[#00a1e0] focus:ring-[#005b96]'}`}
+          disabled={isLoading}
+        />
+        {errors.idade && (
+          <small className="text-red-600">{errors.idade.message}</small>
+        )}
  
+        {/* Campo CPF */}
+        <input
+          type="text"
+          placeholder="CPF (somente números) *"
+          {...register("cpf", {
+            required: "Informe seu CPF",
+            pattern: {
+                value: /^\d{11}$/,
+                message: "CPF deve conter 11 números"
+            }
+          })}
+          className={`border rounded-lg p-2 focus:outline-none focus:ring-2 ${errors.cpf ? 'border-red-500 ring-red-300' : 'border-[#00a1e0] focus:ring-[#005b96]'}`}
+          disabled={isLoading}
+        />
+        {errors.cpf && (
+          <small className="text-red-600">{errors.cpf.message}</small>
+        )}
+ 
+        {/* Campo Telefone (Opcional) */}
+        <input
+          type="tel"
+          placeholder="Telefone (Opcional)"
+          {...register("telefone", {
+             pattern: {
+                 value: /^[\d\s()+-]*$/,
+                 message: "Formato de telefone inválido"
+             }
+          })}
+          className={`border rounded-lg p-2 focus:outline-none focus:ring-2 ${errors.telefone ? 'border-red-500 ring-red-300' : 'border-[#00a1e0] focus:ring-[#005b96]'}`}
+          disabled={isLoading}
+        />
+        {errors.telefone && (
+          <small className="text-red-600">{errors.telefone.message}</small>
