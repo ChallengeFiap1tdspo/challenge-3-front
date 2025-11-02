@@ -53,8 +53,14 @@ export default function Login() {
         >
           Entrar
         </button>
- 
 
-
-
+        <Link
+          to="/cadastro"
+          className="text-[#00a1e0] text-center hover:underline mt-2"
+        >
+          Novo paciente? Cadastre-se aqui
+        </Link>
       </form>
+    </main>
+  );
+}
