@@ -11,4 +11,16 @@ type CadastroForm = {
   telefone?: string; 
   tipoDeficiencia?: string; 
 };
+
+export default function Cadastro() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+    reset,
+  } = useForm<CadastroForm>();
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [apiError, setApiError] = useState<string | null>(null);
  
