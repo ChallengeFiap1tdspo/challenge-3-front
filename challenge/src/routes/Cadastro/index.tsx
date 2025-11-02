@@ -54,3 +54,11 @@ export default function Cadastro() {
             },
             body: JSON.stringify(pacienteParaApi),
         });
+        
+if (response.status === 201) {
+            const pacienteCriado = await response.json();
+            console.log("Cadastro realizado com sucesso:", pacienteCriado);
+            alert("Cadastro realizado com sucesso!");
+            reset();
+            navigate("/primeiro-contato");
+        } else {
