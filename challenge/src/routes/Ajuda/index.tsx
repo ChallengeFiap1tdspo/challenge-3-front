@@ -1,6 +1,4 @@
 
-
-import React from "react";
 type Step = {
   order: number;
   title: string;
