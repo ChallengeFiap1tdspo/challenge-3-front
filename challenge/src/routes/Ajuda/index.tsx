@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams, Link } from "react-router-dom";
 import type { Step } from "../../types/Step";
 import type { Tutorial } from "../../types/Tutorial";
 
@@ -18,17 +19,51 @@ const tutorials: Tutorial[] = [
     id: 1,
     title: "Primeiro Acesso ao Portal",
     description: "Assista a um tutorial simples mostrando cada passo do login.",
-    videoUrl: "https://drive.google.com/file/d/1_0PZ1fi3FKTEP9mPQ2QC2JBMCdBslFLE/view?usp=sharing",
+    videoUrl: "https://drive.google.com/file/d/1_0PZ1fi3FKTEP9mPQ2QC2JBMCdBslFLE/preview",
   },
   {
     id: 2,
     title: "Vídeo Explicativo",
     description: "Tutorial completo mostrando como acessar o portal e iniciar a consulta.",
-    videoUrl: "https://drive.google.com/file/d/19GFDe1AETkPKZTzSg7ld1IKye0t4CS6-/view?usp=sharing",
+    videoUrl: "https://drive.google.com/file/d/19GFDe1AETkPKZTzSg7ld1IKye0t4CS6-/preview",
   },
 ];
 
-export default function AjudaHC() {
+export default function Ajuda() {
+  const { id } = useParams();
+  const tutorial = tutorials.find((t) => t.id === Number(id));
+
+
+  if (id && tutorial) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-6">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-2xl text-[#003f63] font-bold">{tutorial.title}</h1>
+          <p className="mt-2 text-gray-700">{tutorial.description}</p>
+
+          <div className="mt-6 shadow-lg rounded-xl overflow-hidden">
+            <iframe
+              src={tutorial.videoUrl}
+              className="w-full h-80"
+              allow="autoplay"
+              allowFullScreen
+            ></iframe>
+          </div>
+
+          <div className="mt-8">
+            <Link
+              to="/ajuda"
+              className="px-4 py-2 rounded-lg bg-[#0077c8] text-white"
+            >
+              Voltar
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-6">
       <div className="max-w-5xl mx-auto">
@@ -62,7 +97,7 @@ export default function AjudaHC() {
           <aside className="space-y-4">
             <div className="bg-white p-4 rounded-lg shadow">
               <h3 className="font-semibold text-[#003f63]">Tutoriais em vídeo</h3>
-              <p className="text-sm text-gray-600">Clique em Assistir para abrir no Drive.</p>
+              <p className="text-sm text-gray-600">Clique em Assistir para abrir o player.</p>
             </div>
 
             <div className="space-y-3">
@@ -77,7 +112,12 @@ export default function AjudaHC() {
                   </div>
 
                   <div className="p-3 border-t">
-                    <a href={t.videoUrl} target="_blank" rel="noreferrer" className="inline-block px-3 py-1 rounded-lg text-sm font-semibold bg-[#0077c8] text-white hover:bg-[#005b96] transition">Assistir</a>
+                    <Link
+                      to={`/ajuda/${t.id}`}
+                      className="inline-block px-3 py-1 rounded-lg text-sm font-semibold bg-[#0077c8] text-white hover:bg-[#005b96] transition"
+                    >
+                      Assistir
+                    </Link>
                   </div>
                 </div>
               ))}

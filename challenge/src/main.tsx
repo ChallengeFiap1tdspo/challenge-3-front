@@ -18,13 +18,14 @@ import PrimeiroContato from "./routes/Primeiro-Contato/index.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,         // App deve ter <Outlet /> para renderizar as children abaixo
+    element: <App />,        
     errorElement: <Error />,
     children: [
       { path: "/", element: <Home /> },
       { path: "/faq", element: <Faq /> },
       { path: "/contato", element: <Contato /> },
       { path: "/ajuda", element: <Ajuda /> },
+      { path: "/ajuda/:id", element: <Ajuda /> }, // ✅ rota dinâmica adicionada
       { path: "/equipe", element: <Equipe /> },
       { path: "/sobre", element: <Sobre /> },
       { path: "/login", element: <Login /> },
