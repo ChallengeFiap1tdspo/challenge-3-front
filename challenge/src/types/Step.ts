@@ -1,5 +1,5 @@
-export type Step = {
+export interface Step {
   order: number;
   title: string;
   description: string;
-};
+}
