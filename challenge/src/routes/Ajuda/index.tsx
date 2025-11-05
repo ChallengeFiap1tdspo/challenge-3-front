@@ -1,16 +1,6 @@
-
-type Step = {
-  order: number;
-  title: string;
-  description: string;
-};
-
-type Tutorial = {
-  id: number;
-  title: string;
-  description: string;
-  videoUrl?: string;
-};
+import React from "react";
+import type { Step } from "../../types/Step";
+import type { Tutorial } from "../../types/Tutorial";
 
 const steps: Step[] = [
   { order: 1, title: "Primeiro acesso", description: "Acesse o portal do Paciente HC pelo site ou aplicativo." },
@@ -22,7 +12,6 @@ const steps: Step[] = [
   { order: 7, title: "Teleconsultas", description: "Acesse Teleconsultas e aceite o termo de autorização." },
   { order: 8, title: "Iniciar Atendimento", description: "Habilite câmera e microfone e aguarde o profissional entrar na sala." },
 ];
-
 
 const tutorials: Tutorial[] = [
   {
@@ -45,11 +34,10 @@ export default function AjudaHC() {
       <div className="max-w-5xl mx-auto">
         <header className="rounded-2xl bg-[#005b96] text-white p-6 shadow-md mb-6">
           <h1 className="text-2xl md:text-3xl font-extrabold">Portal de Telemedicina — Hospital das Clínicas</h1>
-          <p className="mt-2 text-sm md:text-base opacity-90">Guia completo para acesso aos serviços de Teleconsulta e recursos digitais</p>
+          <p className="mt-2 text-sm md:text-base opacity-90">Guia completo para acesso aos serviços de Teleconsulta</p>
         </header>
 
         <main className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
           <section className="md:col-span-2 space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-semibold text-[#003f63]">Como Funciona</h2>
@@ -71,23 +59,17 @@ export default function AjudaHC() {
             </div>
           </section>
 
-       
           <aside className="space-y-4">
             <div className="bg-white p-4 rounded-lg shadow">
               <h3 className="font-semibold text-[#003f63]">Tutoriais em vídeo</h3>
-              <p className="text-sm text-gray-600">Clique em Assistir para abrir o vídeo em nova aba (Drive).</p>
+              <p className="text-sm text-gray-600">Clique em Assistir para abrir no Drive.</p>
             </div>
 
             <div className="space-y-3">
               {tutorials.map((t) => (
                 <div key={t.id} className="bg-white rounded-lg shadow overflow-hidden">
                   <div className="flex items-center gap-3 p-3">
-                    <div className="w-14 h-10 flex-none bg-[#e6f4ff] rounded-md flex items-center justify-center">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8 5v14l11-7L8 5z" fill="#0077c8" />
-                      </svg>
-                    </div>
-
+                    <div className="w-14 h-10 flex-none bg-[#e6f4ff] rounded-md flex items-center justify-center">▶</div>
                     <div className="flex-1">
                       <h4 className="font-medium text-[#003f63]">{t.title}</h4>
                       <p className="text-xs text-gray-600">{t.description}</p>
@@ -95,22 +77,13 @@ export default function AjudaHC() {
                   </div>
 
                   <div className="p-3 border-t">
-                    <a
-                      href={t.videoUrl || "#"}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-block px-3 py-1 rounded-lg text-sm font-semibold bg-[#0077c8] text-white hover:bg-[#005b96] transition"
-                    >
-                      Assistir
-                    </a>
+                    <a href={t.videoUrl} target="_blank" rel="noreferrer" className="inline-block px-3 py-1 rounded-lg text-sm font-semibold bg-[#0077c8] text-white hover:bg-[#005b96] transition">Assistir</a>
                   </div>
                 </div>
               ))}
             </div>
           </aside>
         </main>
-
-   
       </div>
     </div>
   );
