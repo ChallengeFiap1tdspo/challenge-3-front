@@ -96,6 +96,30 @@ export default function Login() {
         {errors.cpf && (
           <small className="text-red-600">{errors.cpf.message}</small>
         )}
+        {apiError && (
+          <div className="bg-red-100 border border-red-400 text-red-700 p-3 rounded">
+            {apiError}
+          </div>
+        )}
+ 
+        <button
+          type="submit"
+          className={`py-2 rounded-lg transition font-semibold shadow-md ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#005b96] text-white hover:bg-[#004b7d]'}`}
+          disabled={isLoading}
+        >
+          {isLoading ? "Entrando..." : "Entrar"}
+        </button>
+ 
+        <Link
+          to="/cadastro"
+          className="text-[#00a1e0] text-center hover:underline mt-2"
+        >
+          Novo paciente? Cadastre-se aqui
+        </Link>
+      </form>
+    </main>
+  );
+}
  
  
  
