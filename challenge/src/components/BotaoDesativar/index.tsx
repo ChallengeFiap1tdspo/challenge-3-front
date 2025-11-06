@@ -56,3 +56,23 @@ export default function BotaoDesativar({ pacienteId }: Props) {
       setIsLoading(false);
     }
   };
+  return (
+    <div className="mt-8 border-t border-red-300 pt-4">
+      <h2 className="text-lg font-bold text-red-700">Zona de Perigo</h2>
+      <p className="text-sm text-gray-600 mb-3">
+        Ao clicar no botão abaixo, sua conta será desativada permanentemente.
+      </p>
+     
+      <button
+        type="button" 
+        onClick={handleDesativar}
+        disabled={isLoading}
+        className={`w-full py-2 rounded-lg font-semibold text-white transition ${
+          isLoading
+            ? "bg-gray-400 cursor-not-allowed"
+            : "bg-red-600 hover:bg-red-800"
+        }`}
+      >
+        {isLoading ? "Desativando..." : "Desativar Minha Conta"}
+      </button>
+ 
