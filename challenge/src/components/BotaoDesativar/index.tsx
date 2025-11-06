@@ -2,29 +2,29 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
  
 type Props = {
-  pacienteId: number; // Recebe o ID do paciente logado
+  pacienteId: number; 
 };
  
-// Este componente é responsável apenas pela lógica de DELETAR (desativar)
+
 export default function BotaoDesativar({ pacienteId }: Props) {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [deleteError, setDeleteError] = useState<string | null>(null);
  
   const handleDesativar = async () => {
-    // Confirmação MUITO importante
+    
     const confirmado = window.confirm(
       "TEM CERTEZA?\n\nDeseja realmente desativar sua conta?\nEsta ação não pode ser desfeita."
     );
     if (!confirmado) {
-      return; // Para se o usuário clicar em "Cancelar"
+      return; 
     }
  
     setIsLoading(true);
     setDeleteError(null);
  
     try {
-      // Endpoint: DELETE /api/pacientes/{id}
+    
       const apiUrl = `${import.meta.env.VITE_API_URL}/api/pacientes/${pacienteId}`;
       console.log("Desativando conta via DELETE:", apiUrl);
  
@@ -32,7 +32,27 @@ export default function BotaoDesativar({ pacienteId }: Props) {
         method: "DELETE",
         headers: {
           Accept: "application/json",
-          // A Chave de API é obrigatória!
+      
           "X-API-Key": "chave_secreta_muito_segura_123456",
         },
       });
+       
+      if (response.status === 204) {
+        alert("Conta desativada com sucesso.");
+     
+        sessionStorage.removeItem("pacienteLogado");
+        navigate("/");
+      } else {
+        
+        const errorData = await response.json();
+        const errorMessage = errorData.erro || `Erro ${response.status}`;
+        console.error("Erro ao desativar:", errorMessage);
+        setDeleteError(errorMessage);
+      }
+    } catch (error) {
+      console.error("Falha de conexão ao desativar:", error);
+      setDeleteError("Falha de conexão.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
