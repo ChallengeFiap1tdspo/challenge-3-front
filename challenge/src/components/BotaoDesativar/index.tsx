@@ -75,4 +75,12 @@ export default function BotaoDesativar({ pacienteId }: Props) {
       >
         {isLoading ? "Desativando..." : "Desativar Minha Conta"}
       </button>
+      {deleteError && (
+        <div className="bg-red-100 border border-red-400 text-red-700 p-3 rounded mt-3">
+          {deleteError}
+        </div>
+      )}
+    </div>
+  );
+}
  
