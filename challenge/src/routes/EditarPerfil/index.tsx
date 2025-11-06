@@ -115,4 +115,54 @@ export default function EditarPerfil() {
         <h1 className="text-2xl font-bold text-[#005b96] text-center mb-2">
           Editar Perfil
         </h1>
+        <div>
+            <label className="text-sm font-medium text-gray-600">CPF (Não editável)</label>
+            <input
+                type="text"
+                defaultValue={paciente.cpf}
+                disabled
+                className="w-full border rounded-lg p-2 bg-gray-100 text-gray-500"
+            />
+        </div>
+        <div>
+            <label className="text-sm font-medium text-gray-600">Email (Não editável)</label>
+            <input
+                type="email"
+                defaultValue={paciente.email}
+                disabled
+                className="w-full border rounded-lg p-2 bg-gray-100 text-gray-500"
+            />
+        </div>
  
+     
+        <div>
+            <label className="text-sm font-medium text-gray-700">Nome completo *</label>
+            <input
+                type="text"
+                {...register("nome", { required: "Nome é obrigatório" })}
+                className={`w-full border rounded-lg p-2 ${errors.nome ? 'border-red-500' : 'border-gray-300'}`}
+                disabled={isLoading}
+            />
+            {errors.nome && <small className="text-red-600">{errors.nome.message}</small>}
+        </div>
+ 
+        <div>
+            <label className="text-sm font-medium text-gray-700">Idade *</label>
+            <input
+                type="number"
+                {...register("idade", { required: "Idade é obrigatória", valueAsNumber: true })}
+                className={`w-full border rounded-lg p-2 ${errors.idade ? 'border-red-500' : 'border-gray-300'}`}
+                disabled={isLoading}
+            />
+            {errors.idade && <small className="text-red-600">{errors.idade.message}</small>}
+        </div>
+ 
+         <div>
+            <label className="text-sm font-medium text-gray-700">Telefone (Opcional)</label>
+            <input
+                type="tel"
+                {...register("telefone")}
+                className="w-full border border-gray-300 rounded-lg p-2"
+                disabled={isLoading}
+            />
+        </div>
