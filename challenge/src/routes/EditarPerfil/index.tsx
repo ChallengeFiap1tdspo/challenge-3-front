@@ -166,3 +166,42 @@ export default function EditarPerfil() {
                 disabled={isLoading}
             />
         </div>
+        <div>
+            <label className="text-sm font-medium text-gray-700">Tipo de Deficiência (Opcional)</label>
+            <input
+                type="text"
+                {...register("tipoDeficiencia")}
+                className="w-full border border-gray-300 rounded-lg p-2"
+                disabled={isLoading}
+            />
+        </div>
+ 
+       
+         {apiError && (
+            <div className="bg-red-100 border border-red-400 text-red-700 p-3 rounded">
+                {apiError}
+            </div>
+         )}
+         {success && (
+            <div className="bg-green-100 border border-green-400 text-green-700 p-3 rounded">
+                {success}
+            </div>
+         )}
+ 
+        <button
+          type="submit"
+          className={`w-full py-2 rounded-lg ${
+            isLoading ? "bg-gray-400" : "bg-[#005b96]"
+          } text-white font-semibold shadow-md`}
+          disabled={isLoading}
+        >
+          {isLoading ? "Salvando..." : "Salvar Alterações"}
+        </button>
+ 
+       
+        <BotaoDesativar pacienteId={paciente.id} />
+ 
+      </form>
+    </main>
+  );
+}
