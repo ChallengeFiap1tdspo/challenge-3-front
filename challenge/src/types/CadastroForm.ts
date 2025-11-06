@@ -3,6 +3,6 @@ export type CadastroForm = {
   email: string;
   idade: number;
   cpf: string;
-  telefone?: string;
-  tipoDeficiencia?: string;
+  telefone?: string; 
+  tipoDeficiencia?: string; 
 };

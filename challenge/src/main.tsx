@@ -14,11 +14,12 @@ import Sobre from "./routes/Sobre/index.tsx";
 import Login from "./routes/Login/index.tsx";
 import Cadastro from "./routes/Cadastro/index.tsx";
 import PrimeiroContato from "./routes/Primeiro-Contato/index.tsx";
+import EditarPerfil from "./routes/EditarPerfil/index.tsx"; 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,         // App deve ter <Outlet /> para renderizar as children abaixo
+    element: <App />,
     errorElement: <Error />,
     children: [
       { path: "/", element: <Home /> },
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
       { path: "/login", element: <Login /> },
       { path: "/cadastro", element: <Cadastro /> },
       { path: "/primeiro-contato", element: <PrimeiroContato /> },
+      { path: "/editar-perfil", element: <EditarPerfil /> }
     ],
   },
 ]);
