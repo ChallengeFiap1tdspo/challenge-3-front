@@ -68,5 +68,34 @@ export default function Login() {
       setIsLoading(false);
     }
   };
+  return (
+    <main className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#00a1e0]/30 to-[#005b96]/30 p-4">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-sm flex flex-col gap-4 border-t-4 border-[#005b96]"
+      >
+        <h1 className="text-2xl font-bold text-[#005b96] text-center mb-2">
+          Acesso do Paciente
+        </h1>
+ 
+     
+     
+        <input
+          type="text"
+          placeholder="CPF (somente números) *"
+          {...register("cpf", {
+            required: "Informe seu CPF",
+            pattern: {
+                value: /^\d{11}$/,
+                message: "CPF deve conter 11 números"
+            }
+          })}
+          className={`border rounded-lg p-2 focus:outline-none focus:ring-2 ${errors.cpf ? 'border-red-500 ring-red-300' : 'border-[#00a1e0] focus:ring-[#005b96]'}`}
+          disabled={isLoading}
+        />
+        {errors.cpf && (
+          <small className="text-red-600">{errors.cpf.message}</small>
+        )}
+ 
  
  
