@@ -45,4 +45,28 @@ export default function Login() {
  
         setApiError(null);
         navigate("/ajuda");
+        } else if (response.status === 404) {
+       
+        console.error("Erro no login: CPF não encontrado.");
+        setApiError("CPF não encontrado ou cadastro inativo.");
+      } else if (response.status === 401) {
+         console.error("Erro no login: Chave de API errada ou faltando.");
+         setApiError("Erro de autenticação. Contate o suporte.");
+      } else {
+     
+        const errorData = await response.json();
+        const errorMessage = errorData.erro || `Erro ${response.status}: ${response.statusText}`;
+        console.error("Erro da API no login:", errorMessage);
+        setApiError(errorMessage);
+      }
+ 
+    } catch (error) {
+   
+      console.error("Falha ao conectar com a API:", error);
+      setApiError("Não foi possível conectar ao servidor. Tente novamente mais tarde.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+ 
  
