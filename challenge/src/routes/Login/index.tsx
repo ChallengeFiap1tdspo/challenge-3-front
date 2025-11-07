@@ -38,16 +38,16 @@ export default function Login() {
       setIsLoading(false);
 
       if (response.ok) {
-        // Sucesso (200 OK) - Paciente encontrado
+        
         const paciente = await response.json();
         console.log("Login realizado:", paciente);
-        // TODO: Salvar dados do paciente no localStorage/Contexto se necessário
+        
         navigate("/ajuda");
       } else if (response.status === 404) {
-        // Não encontrado
+      
         setApiError("CPF não encontrado. Verifique os dados ou cadastre-se.");
       } else {
-        // Outros erros
+        
         const errorData = await response.json();
         console.error("Erro no login:", errorData);
         setApiError(errorData.erro || "Falha ao tentar login. Tente novamente.");
@@ -89,8 +89,7 @@ export default function Login() {
           <small className="text-red-600">{errors.cpf.message}</small>
         )}
 
-        {/* Exibe mensagem de erro da API */}
-        {apiError && <small className="text-red-600">{apiError}</small>}
+                {apiError && <small className="text-red-600">{apiError}</small>}
 
         <button
           type="submit"

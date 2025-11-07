@@ -31,15 +31,13 @@ export default function Cadastro() {
     setIsLoading(true);
     setApiError(null);
 
-    // O backend espera um objeto Paciente.
-    // Vamos mapear os dados do formulário para esse objeto.
     const pacienteData = {
       nome: data.nome,
       email: data.email,
-      idade: Number(data.idade), // Garante que é número
+      idade: Number(data.idade), 
       cpf: data.cpf,
-      tipoDeficiencia: data.tipoDeficiencia || null, // Campo opcional
-      telefone: data.telefone || null, // Campo opcional
+      tipoDeficiencia: data.tipoDeficiencia || null, 
+      telefone: data.telefone || null, 
     };
 
     try {
@@ -47,7 +45,7 @@ export default function Cadastro() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-API-Key": API_KEY, // Chave de API obrigatória
+          "X-API-Key": API_KEY, 
         },
         body: JSON.stringify(pacienteData),
       });
@@ -55,14 +53,14 @@ export default function Cadastro() {
       setIsLoading(false);
 
       if (response.ok) {
-        // Sucesso (ex: 201 Created)
+        
         console.log("Cadastro realizado:", await response.json());
         navigate("/primeiro-contato");
       } else if (response.status === 409) {
-        // Conflito (CPF já cadastrado)
+        
         setApiError("Este CPF já está cadastrado.");
       } else {
-        // Outros erros
+        
         const errorData = await response.json();
         console.error("Erro no cadastro:", errorData);
         setApiError(errorData.erro || "Falha ao cadastrar. Tente novamente.");
@@ -124,8 +122,7 @@ export default function Cadastro() {
           <small className="text-red-600">{errors.cpf.message}</small>
         )}
 
-        {/* Exibe mensagem de erro da API */}
-        {apiError && <small className="text-red-600">{apiError}</small>}
+                {apiError && <small className="text-red-600">{apiError}</small>}
 
         <button
           type="submit"
