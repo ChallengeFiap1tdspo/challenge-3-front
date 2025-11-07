@@ -1,71 +1,84 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
-import type { CadastroForm } from "../../types/CadastroForm";
+
+type CadastroForm = {
+  nome: string;
+  email: string;
+  idade: number;
+  cpf: string;
+  
+  tipoDeficiencia?: string;
+  telefone?: string;
+};
+
+
+const API_URL = import.meta.env.VITE_API_URL="https://challenge-4-java.onrender.com/api";
+const API_KEY = import.meta.env.VITE_API_KEY="chave_secreta_muito_segura_123456";
 
 export default function Cadastro() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
-    reset,
   } = useForm<CadastroForm>();
-
   const navigate = useNavigate();
+
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
 
   const onSubmit = async (data: CadastroForm) => {
     setIsLoading(true);
     setApiError(null);
 
-    const pacienteParaApi = {
+    // O backend espera um objeto Paciente.
+    // Vamos mapear os dados do formulário para esse objeto.
+    const pacienteData = {
       nome: data.nome,
-      idade: Number(data.idade),
-      tipoDeficiencia: data.tipoDeficiencia || null,
-      telefone: data.telefone || null,
-      cpf: data.cpf.replaceAll(/\D/g, ""),
       email: data.email,
+      idade: Number(data.idade), // Garante que é número
+      cpf: data.cpf,
+      tipoDeficiencia: data.tipoDeficiencia || null, // Campo opcional
+      telefone: data.telefone || null, // Campo opcional
     };
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL + "/api/pacientes";
-
-      const response = await fetch(apiUrl, {
+      const response = await fetch(`${API_URL}/pacientes`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json",
-          "X-API-Key": "chave_secreta_muito_segura_123456",
+          "X-API-Key": API_KEY, // Chave de API obrigatória
         },
-        body: JSON.stringify(pacienteParaApi),
+        body: JSON.stringify(pacienteData),
       });
 
-      if (response.status === 201) {
-        reset();
-        setSuccess(true);
-        setTimeout(() => navigate("/primeiro-contato"), 1600);
-      } else {
-        const errorData = await response.json();
-        setApiError(errorData.erro || errorData.message || `Erro ${response.status}`);
-        if (response.status === 409) {
-          setError("cpf", { type: "manual", message: "CPF já cadastrado." });
-        }
-      }
-    } catch {
-      setApiError("Falha de conexão.");
-    } finally {
       setIsLoading(false);
+
+      if (response.ok) {
+        // Sucesso (ex: 201 Created)
+        console.log("Cadastro realizado:", await response.json());
+        navigate("/primeiro-contato");
+      } else if (response.status === 409) {
+        // Conflito (CPF já cadastrado)
+        setApiError("Este CPF já está cadastrado.");
+      } else {
+        // Outros erros
+        const errorData = await response.json();
+        console.error("Erro no cadastro:", errorData);
+        setApiError(errorData.erro || "Falha ao cadastrar. Tente novamente.");
+      }
+    } catch (error) {
+      setIsLoading(false);
+      console.error("Erro de rede:", error);
+      setApiError("Não foi possível conectar à API. Verifique sua rede.");
     }
   };
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#005b96]/30 to-[#00a1e0]/30 p-4">
+    <main className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#005b96]/30 to-[#00a1e0]/30">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-sm flex flex-col gap-4 border-t-4 border-[#00a1e0]"
+        className="bg-white shadow-lg rounded-2xl p-8 w-80 flex flex-col gap-4 border-t-4 border-[#00a1e0]"
       >
         <h1 className="text-2xl font-bold text-[#005b96] text-center mb-2">
           Cadastro de Novo Paciente
@@ -73,65 +86,59 @@ export default function Cadastro() {
 
         <input
           type="text"
-          placeholder="Nome completo *"
-          {...register("nome", { required: "Informe seu nome completo" })}
-          className="border rounded-lg p-2"
+          placeholder="Nome completo"
+          {...register("nome", { required: "Informe seu nome" })}
+          className="border border-[#00a1e0] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#005b96]"
         />
-        {errors.nome && <small className="text-red-600">{errors.nome.message}</small>}
+        {errors.nome && (
+          <small className="text-red-600">{errors.nome.message}</small>
+        )}
 
         <input
           type="email"
-          placeholder="E-mail *"
+          placeholder="E-mail"
           {...register("email", { required: "Informe seu e-mail" })}
-          className="border rounded-lg p-2"
+          className="border border-[#00a1e0] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#005b96]"
         />
-        {errors.email && <small className="text-red-600">{errors.email?.message}</small>}
+        {errors.email && (
+          <small className="text-red-600">{errors.email.message}</small>
+        )}
 
         <input
           type="number"
-          placeholder="Idade *"
+          placeholder="Idade"
           {...register("idade", { required: "Informe sua idade" })}
-          className="border rounded-lg p-2"
+          className="border border-[#00a1e0] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#005b96]"
         />
-        {errors.idade && <small className="text-red-600">{errors.idade.message}</small>}
+        {errors.idade && (
+          <small className="text-red-600">{errors.idade.message}</small>
+        )}
 
         <input
           type="text"
-          placeholder="CPF (somente números) *"
+          placeholder="CPF"
           {...register("cpf", { required: "Informe seu CPF" })}
-          className="border rounded-lg p-2"
+          className="border border-[#00a1e0] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#005b96]"
         />
-        {errors.cpf && <small className="text-red-600">{errors.cpf.message}</small>}
-
-        <input
-          type="tel"
-          placeholder="Telefone (Opcional)"
-          {...register("telefone")}
-          className="border rounded-lg p-2"
-        />
-
-        {apiError && (
-          <div className="bg-red-100 border border-red-400 text-red-700 p-3 rounded">
-            {apiError}
-          </div>
+        {errors.cpf && (
+          <small className="text-red-600">{errors.cpf.message}</small>
         )}
-        {success && (
-          <div className="bg-green-100 border border-green-400 text-green-700 p-3 rounded animate-pulse">
-            Cadastro realizado com sucesso!
-          </div>
-        )}
+
+        {/* Exibe mensagem de erro da API */}
+        {apiError && <small className="text-red-600">{apiError}</small>}
 
         <button
           type="submit"
-          className={`py-2 rounded-lg ${
-            isLoading ? "bg-gray-400" : "bg-[#00a1e0]"
-          } text-white font-semibold shadow-md`}
           disabled={isLoading}
+          className="bg-[#00a1e0] text-white py-2 rounded-lg hover:bg-[#008ac0] transition font-semibold shadow-md disabled:bg-gray-400"
         >
           {isLoading ? "Cadastrando..." : "Cadastrar"}
         </button>
 
-        <Link to="/login" className="text-[#005b96] text-center hover:underline">
+        <Link
+          to="/login"
+          className="text-[#005b96] text-center hover:underline mt-2"
+        >
           Já possui cadastro? Faça login
         </Link>
       </form>
