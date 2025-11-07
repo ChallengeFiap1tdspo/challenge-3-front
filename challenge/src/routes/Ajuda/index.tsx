@@ -33,7 +33,6 @@ export default function Ajuda() {
   const { id } = useParams();
   const tutorial = tutorials.find((t) => t.id === Number(id));
 
-
   if (id && tutorial) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-6">
@@ -63,6 +62,21 @@ export default function Ajuda() {
     );
   }
 
+  if (id && !tutorial) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-[#003f63] p-6">
+        <div className="text-center space-y-4">
+          <h1 className="text-2xl font-bold">Tutorial não encontrado</h1>
+          <Link
+            to="/ajuda"
+            className="px-4 py-2 rounded-lg bg-[#0077c8] text-white"
+          >
+            Voltar
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-6">
