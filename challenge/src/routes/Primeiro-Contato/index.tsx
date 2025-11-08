@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
+import BotaoDesativar from "../../components/BotaoDesativar/index";
 
 export default function PrimeiroContato() {
+
+
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#00a1e0]/10 to-[#005b96]/8 p-6">
+    <main className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#00a1e0]/10 to-[#005b96]/8 p-6 relative">
       <div className="max-w-4xl w-full bg-white rounded-2xl shadow-lg overflow-hidden">
         
         <div className="h-2 bg-gradient-to-r from-[#005b96] to-[#00a1e0]" />
@@ -66,7 +71,6 @@ export default function PrimeiroContato() {
           </aside>
         </div>
 
-       
         <div className="bg-white/60 p-4 border-t border-gray-100 flex items-center justify-between">
           <span className="text-sm text-gray-600">Hospital das Clínicas</span>
           <div className="flex gap-3">
@@ -84,6 +88,11 @@ export default function PrimeiroContato() {
             </Link>
           </div>
         </div>
+      </div>
+
+      {/* Botão desativar */}
+      <div className="fixed bottom-6 right-6">
+        <BotaoDesativar pacienteId={user.id} />
       </div>
     </main>
   );
