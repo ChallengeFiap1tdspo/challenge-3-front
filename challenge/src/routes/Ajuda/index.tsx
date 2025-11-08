@@ -2,6 +2,7 @@ import React from "react";
 import { useParams, Link } from "react-router-dom";
 import type { Step } from "../../types/Step";
 import type { Tutorial } from "../../types/Tutorial";
+import BotaoDesativar from "../../components/BotaoDesativar/index";
 
 const steps: Step[] = [
   { order: 1, title: "Primeiro acesso", description: "Acesse o portal do Paciente HC pelo site ou aplicativo." },
@@ -31,12 +32,16 @@ const tutorials: Tutorial[] = [
 
 export default function Ajuda() {
   const { id } = useParams();
-  const tutorial = tutorials.find((t) => t.id === Number(id));
 
+
+  const pacienteLogado = sessionStorage.getItem("pacienteLogado");
+  const pacienteId = pacienteLogado ? JSON.parse(pacienteLogado).id : 0;
+
+  const tutorial = tutorials.find((t) => t.id === Number(id));
 
   if (id && tutorial) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-6">
+      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-6 relative">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-2xl text-[#003f63] font-bold">{tutorial.title}</h1>
           <p className="mt-2 text-gray-700">{tutorial.description}</p>
@@ -51,21 +56,38 @@ export default function Ajuda() {
           </div>
 
           <div className="mt-8">
-            <Link
-              to="/ajuda"
-              className="px-4 py-2 rounded-lg bg-[#0077c8] text-white"
-            >
+            <Link to="/ajuda" className="px-4 py-2 rounded-lg bg-[#0077c8] text-white">
               Voltar
             </Link>
           </div>
+        </div>
+
+        <div className="fixed bottom-6 right-6">
+          <BotaoDesativar pacienteId={pacienteId} />
         </div>
       </div>
     );
   }
 
+  if (id && !tutorial) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-[#003f63] p-6 relative">
+        <div className="text-center space-y-4">
+          <h1 className="text-2xl font-bold">Tutorial não encontrado</h1>
+          <Link to="/ajuda" className="px-4 py-2 rounded-lg bg-[#0077c8] text-white">
+            Voltar
+          </Link>
+        </div>
+
+        <div className="fixed bottom-6 right-6">
+          <BotaoDesativar pacienteId={pacienteId} />
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-6">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-6 relative">
       <div className="max-w-5xl mx-auto">
         <header className="rounded-2xl bg-[#005b96] text-white p-6 shadow-md mb-6">
           <h1 className="text-2xl md:text-3xl font-extrabold">Portal de Telemedicina — Hospital das Clínicas</h1>
@@ -124,6 +146,10 @@ export default function Ajuda() {
             </div>
           </aside>
         </main>
+      </div>
+
+      <div className="fixed bottom-6 right-6">
+        <BotaoDesativar pacienteId={pacienteId} />
       </div>
     </div>
   );
