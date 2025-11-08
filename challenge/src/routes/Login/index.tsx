@@ -31,7 +31,7 @@ export default function Login() {
       const response = await fetch(`${API_URL}/pacientes/cpf/${data.cpf}`, {
         method: "GET",
         headers: {
-          "X-API-Key": API_KEY, // Chave de API obrigatória
+          "X-API-Key": API_KEY, 
         },
       });
 
