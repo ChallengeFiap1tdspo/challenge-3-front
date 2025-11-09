@@ -1,24 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
 
-/**
- * AjudaHC.tsx
- * - Versão sem API: dados embutidos (steps + tutoriais)
- * - Estilo inline com classes Tailwind (paleta azul)
- * - Feito como exercício de 2º semestre ADS: direto ao ponto, fácil de entender
- */
-
-type Step = {
-  order: number;
-  title: string;
-  description: string;
-};
-
-type Tutorial = {
-  id: number;
-  title: string;
-  description: string;
-  videoUrl?: string;
-};
+import BotaoEditarPerfil from "../../components/EditarPerfilButton";
+import type { Paciente } from "../../types/Paciente";
+import type { Step } from "../../types/Step";
+import type { Tutorial } from "../../types/Tutorial";
+import BotaoDesativar from "../../components/BotaoDesativar";
 
 const steps: Step[] = [
   { order: 1, title: "Primeiro acesso", description: "Acesse o portal do Paciente HC pelo site ou aplicativo." },
@@ -31,33 +18,103 @@ const steps: Step[] = [
   { order: 8, title: "Iniciar Atendimento", description: "Habilite câmera e microfone e aguarde o profissional entrar na sala." },
 ];
 
-// Seus links do Drive (usados diretamente no botão "Assistir")
 const tutorials: Tutorial[] = [
   {
     id: 1,
     title: "Primeiro Acesso ao Portal",
-    description: "Assista a um tutorial simples mostrando cada passo do login.",
-    videoUrl: "https://drive.google.com/file/d/1_0PZ1fi3FKTEP9mPQ2QC2JBMCdBslFLE/view?usp=sharing",
+    description: "Tutorial simples explicando cada passo.",
+    videoUrl: "https://drive.google.com/file/d/1_0PZ1fi3FKTEP9mPQ2QC2JBMCdBslFLE/preview",
   },
   {
     id: 2,
     title: "Vídeo Explicativo",
-    description: "Tutorial completo mostrando como acessar o portal e iniciar a consulta.",
-    videoUrl: "https://drive.google.com/file/d/19GFDe1AETkPKZTzSg7ld1IKye0t4CS6-/view?usp=sharing",
+    description: "Como acessar o portal e iniciar a consulta.",
+    videoUrl: "https://drive.google.com/file/d/19GFDe1AETkPKZTzSg7ld1IKye0t4CS6-/preview",
   },
 ];
 
-export default function AjudaHC() {
+export default function Ajuda() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [paciente, setPaciente] = useState<Paciente | null>(null);
+
+  useEffect(() => {
+    const pacienteLogadoString = sessionStorage.getItem("pacienteLogado");
+
+    if (!pacienteLogadoString) {
+      alert("Você precisa estar logado para acessar a área de ajuda.");
+      navigate("/login");
+      return;
+    }
+
+    const pacienteLogado: Paciente = JSON.parse(pacienteLogadoString);
+    setPaciente(pacienteLogado);
+  }, [navigate]);
+
+  if (!paciente) {
+    return (
+      <main className="min-h-screen flex items-center justify-center bg-gray-100">
+        Carregando...
+      </main>
+    );
+  }
+
+  if (id) {
+    const tutorial = tutorials.find((t) => t.id === Number(id));
+
+    if (!tutorial) {
+      return (
+        <main className="min-h-screen flex items-center justify-center text-[#003f63] p-6 relative">
+          <div className="text-center space-y-4">
+            <h1 className="text-2xl font-bold">Tutorial não encontrado</h1>
+            <Link to="/ajuda" className="px-4 py-2 rounded-lg bg-[#0077c8] text-white">
+              Voltar
+            </Link>
+          </div>
+
+          <div className="fixed bottom-6 right-6 flex flex-col gap-2">
+            <BotaoEditarPerfil />
+            <BotaoDesativar pacienteId={paciente.id} onDesativado={() => navigate("/")} />
+          </div>
+        </main>
+      );
+    }
+
+    return (
+      <main className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-6 relative">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-2xl text-[#003f63] font-bold">{tutorial.title}</h1>
+          <p className="mt-2 text-gray-700">{tutorial.description}</p>
+
+          <div className="mt-6 shadow-lg rounded-xl overflow-hidden">
+            <iframe src={tutorial.videoUrl} className="w-full h-80" allow="autoplay" allowFullScreen></iframe>
+          </div>
+
+          <div className="mt-8">
+            <Link to="/ajuda" className="px-4 py-2 rounded-lg bg-[#0077c8] text-white">
+              Voltar
+            </Link>
+          </div>
+        </div>
+
+        <div className="fixed bottom-6 right-6 flex flex-col gap-2">
+          <BotaoEditarPerfil />
+          <BotaoDesativar pacienteId={paciente.id} onDesativado={() => navigate("/")} />
+        </div>
+      </main>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-6">
+    <main className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-6 relative">
       <div className="max-w-5xl mx-auto">
         <header className="rounded-2xl bg-[#005b96] text-white p-6 shadow-md mb-6">
           <h1 className="text-2xl md:text-3xl font-extrabold">Portal de Telemedicina — Hospital das Clínicas</h1>
-          <p className="mt-2 text-sm md:text-base opacity-90">Guia completo para acesso aos serviços de Teleconsulta e recursos digitais</p>
+          <p className="mt-2 text-sm md:text-base opacity-90">Guia completo para acesso aos serviços de Teleconsulta</p>
         </header>
 
         <main className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Passos */}
+
           <section className="md:col-span-2 space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-semibold text-[#003f63]">Como Funciona</h2>
@@ -77,29 +134,19 @@ export default function AjudaHC() {
                 </article>
               ))}
             </div>
-
-            <div className="mt-4 p-4 bg-white rounded-lg border-l-4 border-[#0073b3] shadow-sm">
-              <p className="text-sm text-gray-700">Esta tela é funcional sem backend: os tutoriais abrem os links que você forneceu.</p>
-            </div>
           </section>
 
-          {/* Tutoriais */}
           <aside className="space-y-4">
             <div className="bg-white p-4 rounded-lg shadow">
               <h3 className="font-semibold text-[#003f63]">Tutoriais em vídeo</h3>
-              <p className="text-sm text-gray-600">Clique em Assistir para abrir o vídeo em nova aba (Drive).</p>
+              <p className="text-sm text-gray-600">Clique em Assistir para abrir o player.</p>
             </div>
 
             <div className="space-y-3">
               {tutorials.map((t) => (
                 <div key={t.id} className="bg-white rounded-lg shadow overflow-hidden">
                   <div className="flex items-center gap-3 p-3">
-                    <div className="w-14 h-10 flex-none bg-[#e6f4ff] rounded-md flex items-center justify-center">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8 5v14l11-7L8 5z" fill="#0077c8" />
-                      </svg>
-                    </div>
-
+                    <div className="w-14 h-10 flex-none bg-[#e6f4ff] rounded-md flex items-center justify-center">▶</div>
                     <div className="flex-1">
                       <h4 className="font-medium text-[#003f63]">{t.title}</h4>
                       <p className="text-xs text-gray-600">{t.description}</p>
@@ -107,14 +154,12 @@ export default function AjudaHC() {
                   </div>
 
                   <div className="p-3 border-t">
-                    <a
-                      href={t.videoUrl || "#"}
-                      target="_blank"
-                      rel="noreferrer"
+                    <Link
+                      to={`/ajuda/${t.id}`}
                       className="inline-block px-3 py-1 rounded-lg text-sm font-semibold bg-[#0077c8] text-white hover:bg-[#005b96] transition"
                     >
                       Assistir
-                    </a>
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -122,8 +167,16 @@ export default function AjudaHC() {
           </aside>
         </main>
 
-        <footer className="mt-8 text-center text-xs text-gray-500">Feito como exercício — versão sem API, funcional sozinho.</footer>
+        <div className="mt-6 text-sm flex justify-between text-gray-600">
+          <Link to="/">Página inicial</Link>
+          <Link to="/contato" className="text-[#00a1e0]">Suporte</Link>
+        </div>
       </div>
-    </div>
+
+      <div className="fixed bottom-6 right-6 flex flex-col gap-2">
+        <BotaoEditarPerfil />
+        <BotaoDesativar pacienteId={paciente.id} onDesativado={() => navigate("/")} />
+      </div>
+    </main>
   );
 }

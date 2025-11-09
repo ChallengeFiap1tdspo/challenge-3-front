@@ -14,6 +14,7 @@ import Sobre from "./routes/Sobre/index.tsx";
 import Login from "./routes/Login/index.tsx";
 import Cadastro from "./routes/Cadastro/index.tsx";
 import PrimeiroContato from "./routes/Primeiro-Contato/index.tsx";
+import EditarPerfil from "./routes/EditarPerfil/index.tsx"; 
 
 const router = createBrowserRouter([
   {
@@ -25,11 +26,13 @@ const router = createBrowserRouter([
       { path: "/faq", element: <Faq /> },
       { path: "/contato", element: <Contato /> },
       { path: "/ajuda", element: <Ajuda /> },
+      { path: "/ajuda/:id", element: <Ajuda /> },
       { path: "/equipe", element: <Equipe /> },
       { path: "/sobre", element: <Sobre /> },
       { path: "/login", element: <Login /> },
       { path: "/cadastro", element: <Cadastro /> },
-      { path: "/primeiro-contato", element: <PrimeiroContato /> }
+      { path: "/primeiro-contato", element: <PrimeiroContato /> },
+      { path: "/editar-perfil", element: <EditarPerfil /> }
     ],
   },
 ]);
