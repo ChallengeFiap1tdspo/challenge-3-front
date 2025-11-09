@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FiPhone, FiMail, FiMapPin, FiClock } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import type { Contato } from "../../types/Contato";
-
 
 export default function ContatoPage() {
   const { register, handleSubmit, formState: { errors }, reset } =
@@ -127,9 +126,7 @@ export default function ContatoPage() {
                     placeholder="Seu nome"
                   />
                   {errors.nome && (
-                    <small className="text-red-600">
-                      {errors.nome.message}
-                    </small>
+                    <small className="text-red-600">{errors.nome.message}</small>
                   )}
                 </div>
 
@@ -147,9 +144,7 @@ export default function ContatoPage() {
                     placeholder="seu@exemplo.com"
                   />
                   {errors.email && (
-                    <small className="text-red-600">
-                      {errors.email.message}
-                    </small>
+                    <small className="text-red-600">{errors.email.message}</small>
                   )}
                 </div>
 
@@ -165,9 +160,7 @@ export default function ContatoPage() {
                 <div>
                   <label className="text-sm font-medium">Assunto</label>
                   <select
-                    {...register("assunto", {
-                      required: "Escolha um assunto",
-                    })}
+                    {...register("assunto", { required: "Escolha um assunto" })}
                     className="mt-1 w-full border border-[#e6f3fb] rounded-md p-2 bg-white focus:ring-2 focus:ring-[#00a1e0]"
                   >
                     <option value="">Selecione um assunto</option>
@@ -177,25 +170,19 @@ export default function ContatoPage() {
                     <option value="outros">Outros</option>
                   </select>
                   {errors.assunto && (
-                    <small className="text-red-600">
-                      {errors.assunto.message}
-                    </small>
+                    <small className="text-red-600">{errors.assunto.message}</small>
                   )}
                 </div>
 
                 <div>
                   <label className="text-sm font-medium">Mensagem</label>
                   <textarea
-                    {...register("mensagem", {
-                      required: "Escreva sua mensagem",
-                    })}
+                    {...register("mensagem", { required: "Escreva sua mensagem" })}
                     className="mt-1 w-full border border-[#e6f3fb] rounded-md p-2 h-28 resize-y focus:ring-2 focus:ring-[#00a1e0]"
                     placeholder="Escreva aqui sua dúvida ou solicitação"
                   />
                   {errors.mensagem && (
-                    <small className="text-red-600">
-                      {errors.mensagem.message}
-                    </small>
+                    <small className="text-red-600">{errors.mensagem.message}</small>
                   )}
                 </div>
 
