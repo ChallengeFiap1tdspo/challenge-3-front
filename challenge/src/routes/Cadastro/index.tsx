@@ -13,7 +13,7 @@ type CadastroForm = {
 };
  
  
-const API_URL = import.meta.env.VITE_API_URL="https://challenge-4-java.onrender.com";
+const API_URL = import.meta.env.VITE_API_URL="https://challenge-4-java.onrender.com/api";
 const API_KEY = import.meta.env.VITE_API_KEY="chave_secreta_muito_segura_123456";
  
 export default function Cadastro() {
