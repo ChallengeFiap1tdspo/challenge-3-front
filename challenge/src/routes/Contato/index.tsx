@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FiPhone, FiMail, FiMapPin, FiClock } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import type { Contato } from "../../types/Contato";
-
 
 export default function ContatoPage() {
   const { register, handleSubmit, formState: { errors }, reset } =
@@ -235,3 +234,4 @@ export default function ContatoPage() {
     </main>
   );
 }
+
