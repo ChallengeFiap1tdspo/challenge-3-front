@@ -20275,7 +20275,7 @@ function BotaoEditarPerfil() {
     }
   );
 }
-const API_URL$1 = "https://challenge-4-java.onrender.com";
+const API_URL$1 = "https://challenge-4-java.onrender.com/api";
 const API_KEY$1 = "chave_secreta_muito_segura_123456";
 function BotaoDesativar({ pacienteId, onDesativado }) {
   const [loading, setLoading] = reactExports.useState(false);
@@ -20556,7 +20556,7 @@ function Login() {
     setApiError(null);
     const cpfLimpo = data.cpf.replaceAll(/\D/g, "");
     try {
-      const apiUrl = `${"https://challenge-4-java.onrender.com"}/pacientes/cpf/${cpfLimpo}`;
+      const apiUrl = `${"https://challenge-4-java.onrender.com/api"}/pacientes/cpf/${cpfLimpo}`;
       console.log("Chamando API (GET):", apiUrl);
       const response = await fetch(apiUrl, {
         method: "GET",
@@ -20636,7 +20636,7 @@ function Login() {
     }
   ) });
 }
-const API_URL = "https://challenge-4-java.onrender.com";
+const API_URL = "https://challenge-4-java.onrender.com/api";
 const API_KEY = "chave_secreta_muito_segura_123456";
 function Cadastro() {
   const {
@@ -20829,7 +20829,7 @@ function EditarPerfil() {
       email: paciente.email
     };
     try {
-      const apiUrl = `${"https://challenge-4-java.onrender.com"}/pacientes/${paciente.id}`;
+      const apiUrl = `${"https://challenge-4-java.onrender.com/api"}/pacientes/${paciente.id}`;
       const response = await fetch(apiUrl, {
         method: "PUT",
         headers: {
