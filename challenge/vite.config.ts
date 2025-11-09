@@ -7,6 +7,13 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   build: {
     outDir: 'dist',
-    emptyOutDir: true
+    emptyOutDir: true,
+
+    sourcemap: true,
+    minify: 'esbuild'
+  },
+ 
+  define: {
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
   }
 })
