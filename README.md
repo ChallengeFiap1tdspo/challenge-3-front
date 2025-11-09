@@ -16,14 +16,14 @@ Aplicação front-end desenvolvida para o Challenge FIAP, permitindo que pacient
 
 ---
 
-## 👥 Integrantes da Equipe
+##  Integrantes da Equipe --> Turma 1TDSPO
 
 | Nome | RM |
 |------|------|
-| Paulo Henrique Estalise | *informar RM* |
-| Integrante 2 | *informar RM* |
-| Integrante 3 | *informar RM* |
-| Integrante 4 | *informar RM* |
+| Paulo Henrique Estalise | *RM563811* |
+| Emanuel Italo | *RM561337* |
+| Alef Rodrigues | *RM563272* |
+
 
 > Edite os nomes conforme necessário.
 
@@ -65,7 +65,7 @@ Aplicação front-end desenvolvida para o Challenge FIAP, permitindo que pacient
 
 ---
 
-## 🖼️ Imagens do Projeto
+##  Imagens do Projeto
 
 ### Tela Inicial
 ![Home](./challenge/src/img/foto-home.png)
@@ -133,8 +133,7 @@ Integração com API
 Conexão com DDD (backend)
 
 🧷 Link do Repositório GitHub
-
-📌 https://github.com/ChallengeFiap1tdspo/challenge-3-front.git
+ https://github.com/ChallengeFiap1tdspo/challenge-3-front.git
 
 🎥 Link do Vídeo no YouTube:
 
