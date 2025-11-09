@@ -2,40 +2,47 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import "./global.css";
+import App from "./App.tsx";
+import Home from "./routes/Home";
+import Faq from "./routes/Faq";
+import Contato from "./routes/Contato";
+import Error from "./routes/Error";
+import Ajuda from "./routes/Ajuda";
+import Equipe from "./routes/Equipe";
+import Sobre from "./routes/Sobre";
+import Login from "./routes/Login";
+import Cadastro from "./routes/Cadastro";
+import PrimeiroContato from "./routes/Primeiro-Contato";
+import EditarPerfil from "./routes/EditarPerfil";
 
-import Home from "./routes/Home/index.tsx";
-import Faq from "./routes/Faq/index.tsx";
-import Contato from "./routes/Contato/index.tsx";
-import Error from "./routes/Error/index.tsx";
-import Ajuda from "./routes/Ajuda/index.tsx";
-import Equipe from "./routes/Equipe/index.tsx";
-import Sobre from "./routes/Sobre/index.tsx";
-import Login from "./routes/Login/index.tsx";
-import Cadastro from "./routes/Cadastro/index.tsx";
-import PrimeiroContato from "./routes/Primeiro-Contato/index.tsx";
-import EditarPerfil from "./routes/EditarPerfil/index.tsx";
+import "./global.css";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <App />,
     errorElement: <Error />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/faq", element: <Faq /> },
+      { path: "/contato", element: <Contato /> },
+      { path: "/ajuda", element: <Ajuda /> },
+      { path: "/ajuda/:id", element: <Ajuda /> },
+      { path: "/equipe", element: <Equipe /> },
+      { path: "/sobre", element: <Sobre /> },
+      { path: "/login", element: <Login /> },
+      { path: "/cadastro", element: <Cadastro /> },
+      { path: "/primeiro-contato", element: <PrimeiroContato /> },
+      { path: "/editar-perfil", element: <EditarPerfil /> },
+    ],
   },
-  { path: "/faq", element: <Faq /> },
-  { path: "/contato", element: <Contato /> },
-  { path: "/ajuda", element: <Ajuda /> },
-  { path: "/ajuda/:id", element: <Ajuda /> },
-  { path: "/equipe", element: <Equipe /> },
-  { path: "/sobre", element: <Sobre /> },
-  { path: "/login", element: <Login /> },
-  { path: "/cadastro", element: <Cadastro /> },
-  { path: "/primeiro-contato", element: <PrimeiroContato /> },
-  { path: "/editar-perfil", element: <EditarPerfil /> },
 ]);
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>
-);
+const rootElement = document.getElementById("root");
+if (rootElement) {
+  createRoot(rootElement).render(
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>
+  );
+}
