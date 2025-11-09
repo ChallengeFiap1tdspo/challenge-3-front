@@ -87,7 +87,7 @@ O projeto utiliza ícones nativos do Tailwind + SVGs próprios para:
 
 Caso utilize pacotes externos, especifique aqui.
 
----
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## 🔧 Como Executar o Projeto
 
