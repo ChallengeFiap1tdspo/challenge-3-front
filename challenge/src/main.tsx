@@ -2,25 +2,26 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import App from "./App.tsx";
-import Home from "./routes/Home";
-import Faq from "./routes/Faq";
-import Contato from "./routes/Contato";
-import Error from "./routes/Error";
-import Ajuda from "./routes/Ajuda";
-import Equipe from "./routes/Equipe";
-import Sobre from "./routes/Sobre";
-import Login from "./routes/Login";
-import Cadastro from "./routes/Cadastro";
-import PrimeiroContato from "./routes/Primeiro-Contato";
-import EditarPerfil from "./routes/EditarPerfil";
-
+import App from "./App.tsx"; 
 import "./global.css";
 
+import Home from "./routes/Home/index.tsx";
+import Faq from "./routes/Faq/index.tsx";
+import Contato from "./routes/Contato/index.tsx";
+import Error from "./routes/Error/index.tsx";
+import Ajuda from "./routes/Ajuda/index.tsx";
+import Equipe from "./routes/Equipe/index.tsx";
+import Sobre from "./routes/Sobre/index.tsx";
+import Login from "./routes/Login/index.tsx";
+import Cadastro from "./routes/Cadastro/index.tsx";
+import PrimeiroContato from "./routes/Primeiro-Contato/index.tsx";
+import EditarPerfil from "./routes/EditarPerfil/index.tsx";
+
+// Configura o roteamento com App como elemento pai
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <App />, 
     errorElement: <Error />,
     children: [
       { path: "/", element: <Home /> },
@@ -38,11 +39,8 @@ const router = createBrowserRouter([
   },
 ]);
 
-const rootElement = document.getElementById("root");
-if (rootElement) {
-  createRoot(rootElement).render(
-    <StrictMode>
-      <RouterProvider router={router} />
-    </StrictMode>
-  );
-}
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <RouterProvider router={router} />
+  </StrictMode>
+);

@@ -6,9 +6,7 @@ export default function App() {
   return (
     <>
       <Cabecalho />
-      <main>
-        <Outlet />
-      </main>
+      <Outlet />
       <Rodape />
     </>
   );
