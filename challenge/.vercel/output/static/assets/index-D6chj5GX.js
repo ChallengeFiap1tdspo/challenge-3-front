@@ -20276,7 +20276,7 @@ function BotaoEditarPerfil() {
     }
   );
 }
-const API_URL$1 = "https://challenge-4-java.onrender.com/api";
+const API_URL$1 = "https://challenge-4-java.onrender.com";
 const API_KEY$1 = "chave_secreta_muito_segura_123456";
 function BotaoDesativar({ pacienteId, onDesativado }) {
   const [loading, setLoading] = reactExports.useState(false);
@@ -20290,7 +20290,7 @@ function BotaoDesativar({ pacienteId, onDesativado }) {
     setLoading(true);
     setErro(null);
     try {
-      const response = await fetch(`${API_URL$1}/api/pacientes/${pacienteId}`, {
+      const response = await fetch(`${API_URL$1}/pacientes/${pacienteId}`, {
         method: "DELETE",
         headers: {
           "X-API-Key": API_KEY$1,
@@ -20557,7 +20557,7 @@ function Login() {
     setApiError(null);
     const cpfLimpo = data.cpf.replaceAll(/\D/g, "");
     try {
-      const apiUrl = `${"https://challenge-4-java.onrender.com/api"}/api/pacientes/cpf/${cpfLimpo}`;
+      const apiUrl = `${"https://challenge-4-java.onrender.com"}/pacientes/cpf/${cpfLimpo}`;
       console.log("Chamando API (GET):", apiUrl);
       const response = await fetch(apiUrl, {
         method: "GET",
@@ -20637,7 +20637,7 @@ function Login() {
     }
   ) });
 }
-const API_URL = "https://challenge-4-java.onrender.com/api";
+const API_URL = "https://challenge-4-java.onrender.com";
 const API_KEY = "chave_secreta_muito_segura_123456";
 function Cadastro() {
   const {
@@ -20830,7 +20830,7 @@ function EditarPerfil() {
       email: paciente.email
     };
     try {
-      const apiUrl = `${"https://challenge-4-java.onrender.com/api"}/api/pacientes/${paciente.id}`;
+      const apiUrl = `${"https://challenge-4-java.onrender.com"}/pacientes/${paciente.id}`;
       const response = await fetch(apiUrl, {
         method: "PUT",
         headers: {
