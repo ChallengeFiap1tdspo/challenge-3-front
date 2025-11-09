@@ -96,6 +96,8 @@ Caso utilize pacotes externos, especifique aqui.
 ```bash
 git clone https://github.com/ChallengeFiap1tdspo/challenge-3-front.git
 
+cd challenge-3-front.
+
 ### 2. Acesse a pasta do proejto:
 'cd challenge
 
@@ -132,14 +134,16 @@ Integração com API
 
 Conexão com DDD (backend)
 
-🧷 Link do Repositório GitHub
+Link do Repositório GitHub:
+https://github.com/ChallengeFiap1tdspo/challenge-3-front.git
 
-📌 https://github.com/ChallengeFiap1tdspo/challenge-3-front.git
+LinK do projeto na Vercel:
+https://challenge-3-front.vercel.app/
 
-🎥 Link do Vídeo no YouTube:
+Link api de JAVA: https://challenge-4-java.onrender.com
+
+Link do Vídeo no YouTube:
 https://www.youtube.com/watch?v=UDfaCn9G5t0
-
-
 
 🛠️ Desenvolvido para o Challenge FIAP
 
