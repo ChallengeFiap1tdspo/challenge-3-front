@@ -1,5 +1,5 @@
 import Menu from "../Menu/Menu";
-import type { NavLinkItem } from "../Menu/Menu";
+import type { NavLinkItem } from "../../types/menu";
 
 export default function Cabecalho() {
   const links: NavLinkItem[] = [

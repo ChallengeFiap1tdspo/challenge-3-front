@@ -1,16 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../../img/logo_sem_fundo.png";
-
-export interface NavLinkItem {
-  href: string;
-  label: string;
-}
-
-interface MenuProps {
-  links?: NavLinkItem[];
-  onItemClick?: () => void;
-}
+import type { MenuProps } from "../../types/menu";
 
 export default function Menu({ links = [], onItemClick }: MenuProps) {
   const [open, setOpen] = useState(false);
@@ -31,7 +22,9 @@ export default function Menu({ links = [], onItemClick }: MenuProps) {
               onClick={() => onItemClick?.()}
               className={({ isActive }) =>
                 `px-3 py-2 rounded-md text-base font-medium transition-colors ${
-                  isActive ? "text-white bg-[#1e4ed8] shadow-md" : "text-[#005b96] hover:text-gray-400"
+                  isActive
+                    ? "text-white bg-[#1e4ed8] shadow-md"
+                    : "text-[#005b96] hover:text-gray-400"
                 }`
               }
             >
@@ -47,15 +40,15 @@ export default function Menu({ links = [], onItemClick }: MenuProps) {
           type="button"
         >
           {open ? (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
-              <path d="M6 6L18 18" stroke="#005b96" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M6 18L18 6" stroke="#005b96" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path d="M6 6L18 18" stroke="#005b96" strokeWidth="2" strokeLinecap="round" />
+              <path d="M6 18L18 6" stroke="#005b96" strokeWidth="2" strokeLinecap="round" />
             </svg>
           ) : (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
-              <path d="M3 6h18" stroke="#005b96" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M3 12h18" stroke="#005b96" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M3 18h18" stroke="#005b96" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path d="M3 6h18" stroke="#005b96" strokeWidth="2" strokeLinecap="round" />
+              <path d="M3 12h18" stroke="#005b96" strokeWidth="2" strokeLinecap="round" />
+              <path d="M3 18h18" stroke="#005b96" strokeWidth="2" strokeLinecap="round" />
             </svg>
           )}
         </button>
