@@ -68,12 +68,12 @@ Aplicação front-end desenvolvida para o Challenge FIAP, permitindo que pacient
 ## 🖼️ Imagens do Projeto
 
 ### Tela Inicial
-![Home](./src/assets/screenshot-home.png)
+![Home](./challenge/src/img/foto-home.png)
 
 ### Ajuda / Gerenciamento de Conta
-![Ajuda](./src/assets/screenshot-ajuda.png)
+![Ajuda](./challenge/src/img/foto-ajuda.png)
 
-> Dica: inclua prints reais do sistema dentro da pasta `/assets`.
+
 
 ---
 
