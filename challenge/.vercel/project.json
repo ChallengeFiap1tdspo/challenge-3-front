@@ -1,1 +1,16 @@
-{"projectId":"prj_Yv2qmKoEUrQ5rbOUodL5clwzyjXk","orgId":"team_9M4dzZhMzs3HG5Tq6i1YGYYO","projectName":"challenge-3-front"}
+{
+  "projectId": "prj_Yv2qmKoEUrQ5rbOUodL5clwzyjXk",
+  "orgId": "team_9M4dzZhMzs3HG5Tq6i1YGYYO",
+  "projectName": "challenge-3-front",
+  "settings": {
+    "createdAt": 1762702920959,
+    "framework": null,
+    "devCommand": null,
+    "installCommand": null,
+    "buildCommand": null,
+    "outputDirectory": null,
+    "rootDirectory": null,
+    "directoryListing": false,
+    "nodeVersion": "22.x"
+  }
+}
