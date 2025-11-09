@@ -1,20 +1,10 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
+import type { CadastroForm } from "../../types/CadastroForm";
 
-type CadastroForm = {
-  nome: string;
-  email: string;
-  idade: number;
-  cpf: string;
-  
-  tipoDeficiencia?: string;
-  telefone?: string;
-};
-
-
-const API_URL = import.meta.env.VITE_API_URL="https://challenge-4-java.onrender.com/api";
-const API_KEY = import.meta.env.VITE_API_KEY="chave_secreta_muito_segura_123456";
+const API_URL = import.meta.env.VITE_API_URL || "https://challenge-4-java.onrender.com/api";
+const API_KEY = import.meta.env.VITE_API_KEY || "chave_secreta_muito_segura_123456";
 
 export default function Cadastro() {
   const {
@@ -22,8 +12,8 @@ export default function Cadastro() {
     handleSubmit,
     formState: { errors },
   } = useForm<CadastroForm>();
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
 
@@ -34,10 +24,10 @@ export default function Cadastro() {
     const pacienteData = {
       nome: data.nome,
       email: data.email,
-      idade: Number(data.idade), 
+      idade: Number(data.idade),
       cpf: data.cpf,
-      tipoDeficiencia: data.tipoDeficiencia || null, 
-      telefone: data.telefone || null, 
+      tipoDeficiencia: data.tipoDeficiencia || null,
+      telefone: data.telefone || null,
     };
 
     try {
@@ -45,7 +35,7 @@ export default function Cadastro() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-API-Key": API_KEY, 
+          "X-API-Key": API_KEY,
         },
         body: JSON.stringify(pacienteData),
       });
@@ -53,22 +43,20 @@ export default function Cadastro() {
       setIsLoading(false);
 
       if (response.ok) {
-        
-        console.log("Cadastro realizado:", await response.json());
         navigate("/primeiro-contato");
       } else if (response.status === 409) {
-        
         setApiError("Este CPF já está cadastrado.");
       } else {
-        
         const errorData = await response.json();
-        console.error("Erro no cadastro:", errorData);
         setApiError(errorData.erro || "Falha ao cadastrar. Tente novamente.");
       }
-    } catch (error) {
+    } catch (error: unknown) {
       setIsLoading(false);
-      console.error("Erro de rede:", error);
-      setApiError("Não foi possível conectar à API. Verifique sua rede.");
+      if (error instanceof Error) {
+        setApiError("Não foi possível conectar à API. Verifique sua rede.");
+      } else {
+        setApiError("Erro inesperado.");
+      }
     }
   };
 
@@ -88,9 +76,7 @@ export default function Cadastro() {
           {...register("nome", { required: "Informe seu nome" })}
           className="border border-[#00a1e0] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#005b96]"
         />
-        {errors.nome && (
-          <small className="text-red-600">{errors.nome.message}</small>
-        )}
+        {errors.nome && <small className="text-red-600">{errors.nome.message}</small>}
 
         <input
           type="email"
@@ -98,9 +84,7 @@ export default function Cadastro() {
           {...register("email", { required: "Informe seu e-mail" })}
           className="border border-[#00a1e0] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#005b96]"
         />
-        {errors.email && (
-          <small className="text-red-600">{errors.email.message}</small>
-        )}
+        {errors.email && <small className="text-red-600">{errors.email.message}</small>}
 
         <input
           type="number"
@@ -108,9 +92,7 @@ export default function Cadastro() {
           {...register("idade", { required: "Informe sua idade" })}
           className="border border-[#00a1e0] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#005b96]"
         />
-        {errors.idade && (
-          <small className="text-red-600">{errors.idade.message}</small>
-        )}
+        {errors.idade && <small className="text-red-600">{errors.idade.message}</small>}
 
         <input
           type="text"
@@ -118,11 +100,9 @@ export default function Cadastro() {
           {...register("cpf", { required: "Informe seu CPF" })}
           className="border border-[#00a1e0] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#005b96]"
         />
-        {errors.cpf && (
-          <small className="text-red-600">{errors.cpf.message}</small>
-        )}
+        {errors.cpf && <small className="text-red-600">{errors.cpf.message}</small>}
 
-                {apiError && <small className="text-red-600">{apiError}</small>}
+        {apiError && <small className="text-red-600">{apiError}</small>}
 
         <button
           type="submit"
