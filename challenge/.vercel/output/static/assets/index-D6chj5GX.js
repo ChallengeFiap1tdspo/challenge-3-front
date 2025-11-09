@@ -18008,7 +18008,7 @@ var Link = reactExports.forwardRef(
       }
     }
     let link = (
-      // eslint-disable-next-line jsx-a11y/anchor-has-content
+     
       /* @__PURE__ */ reactExports.createElement(
         "a",
         {
@@ -18042,8 +18042,7 @@ var NavLink = reactExports.forwardRef(
     let location = useLocation();
     let routerState = reactExports.useContext(DataRouterStateContext);
     let { navigator: navigator2, basename } = reactExports.useContext(NavigationContext);
-    let isTransitioning = routerState != null && // Conditional usage is OK here because the usage of a data router is static
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+    let isTransitioning = routerState != null && 
     useViewTransitionState(path) && viewTransition === true;
     let toPathname = navigator2.encodeLocation ? navigator2.encodeLocation(path).pathname : path.pathname;
     let locationPathname = location.pathname;
